@@ -1,0 +1,28 @@
+version: "3.5"
+
+services:
+  app:
+    build: .
+    container_name: todo-api
+    ports:
+      - 3990:3990
+    volumes:
+      - .:/usr/app
+    depends_on:
+      - db
+
+  db:
+    container_name: postgres_container
+    image: postgres
+    environment:
+       - POSTGRES_USER=postgres
+       - POSTGRES_PASSWORD=changeme
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: always
+
+
+volumes:
+    postgres:
