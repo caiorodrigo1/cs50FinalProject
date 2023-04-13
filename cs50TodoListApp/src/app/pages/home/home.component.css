@@ -1,0 +1,11 @@
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 0.98 0.98 auto;
+}
+
+.narrow-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
