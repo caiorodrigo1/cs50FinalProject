@@ -6,9 +6,12 @@ import { router } from "./routes";
 import { errors } from "celebrate";
 import { AppError } from "./shared/errors/AppError";
 import swaggerFile from "./swagger.json";
+import cors from "cors";
 
 AppDataSource.initialize().then(() => {
   const app = express();
+
+  app.use(cors());
 
   app.use(express.json());
 
