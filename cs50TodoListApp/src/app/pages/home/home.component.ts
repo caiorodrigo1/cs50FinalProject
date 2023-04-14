@@ -1,32 +1,65 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { LoginService } from 'src/app/user/login/login.service';
+import { environment } from 'src/environments/environment';
 
-export interface PeriodicElement {
-  task: string;
-  position: number;
+export interface Task {
+  isDone: boolean;
+  content: string;
   author: string;
-  done: boolean;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, task: 'Do breakfast', author: 'Caio', done: true },
-  { position: 2, task: 'Go to gym', author: 'Caio', done: true },
-  { position: 3, task: 'Drink water', author: 'Caio', done: false },
-  { position: 4, task: 'Call Jhon Doe', author: 'Caio', done: false },
-  { position: 5, task: 'Finish project', author: 'Caio', done: false },
-  { position: 6, task: 'Read a book', author: 'Caio', done: false },
-  { position: 7, task: 'Play PS5', author: 'Caio', done: false },
-  { position: 8, task: 'Watch Breaking Bad', author: 'Caio', done: false },
-  { position: 9, task: 'IDK', author: 'Caio', done: false },
-  { position: 10, task: 'Sleep early', author: 'Caio', done: false },
-];
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-// export class HomeComponent {}
-export class HomeComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+export class HomeComponent implements OnInit {
+  displayedColumns: string[] = ['isDone', 'content', 'author', 'actions'];
+  dataSource: Task[] = [];
+
+  constructor(
+    public loginService: LoginService,
+    private router: Router,
+    private http: HttpClient
+  ) {}
+
+  ngOnInit(): void {
+    this.getTasks().subscribe((tasks: Task[]) => {
+      this.dataSource = tasks;
+    });
+  }
+
+  getTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(`${environment.baseUrlBackend}/tasks`);
+  }
+
+  markAsDone(id: string) {
+    return this.http
+      .patch(`${environment.baseUrlBackend}/tasks/done/${id}, body: any`)
+      .subscribe(
+        () => {},
+        (error) => {
+          console.error('Error marking task as done', error);
+        }
+      );
+  }
+
+  editTask(task: any) {
+    // Open a dialog to edit the task
+  }
+
+  deleteTask(task: any) {
+    // Make an HTTP request to delete the task
+  }
+
+  isLoggedIn(): boolean {
+    return this.loginService.isAuthenticated();
+  }
+
+  onLogout(): void {
+    this.loginService.logout();
+  }
 }
