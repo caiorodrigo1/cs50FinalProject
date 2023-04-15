@@ -23,9 +23,17 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginService } from './user/login/login.service';
 import { LogoutComponent } from './user/logout/logout.component';
 import { AuthInterceptor } from './user/auth.interceptor';
+import { AuthGuard } from './user/auth.guard';
+import { TaskCreateComponent } from './user/task-create/task-create.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, LogoutComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    LogoutComponent,
+    TaskCreateComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,6 +55,7 @@ import { AuthInterceptor } from './user/auth.interceptor';
   ],
   providers: [
     LoginService,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -4,8 +4,13 @@
   <a mat-raised-button routerLink="/logout">Logout</a>
 </mat-toolbar>
 
-<mat-card class="narrow-card">
-  <mat-card-content style="font-weight: 800; font-size: x-large;">TASKS TODO</mat-card-content>
+<mat-card class="narrow-card" style="padding-bottom: 20px;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <mat-card-content style="font-weight: 800; font-size: x-large;">TASKS TODO</mat-card-content>
+    <a mat-raised-button data-bs-toggle="modal" data-bs-target="#addNewTask" color="primary" style="margin-top: 15px; margin-right: 20px;">+ Add a task</a>
+  </div>
+
+
   <br>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="isDone">
@@ -26,13 +31,11 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let task">
-        <button mat-icon-button color="primary" (click)="markAsDone(task.id)">
+        <button mat-icon-button color="primary" (click)="markAsDone(task)">
           <mat-icon>done</mat-icon>
         </button>
-        <button mat-icon-button color="accent" (click)="editTask(task)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="deleteTask(task.id)">
+        
+        <button mat-icon-button color="warn" (click)="deleteTask(task)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>
@@ -42,9 +45,19 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-
 </mat-card>
-  
-<div class="row fixed-bottom">
-  <div class="container text-center text-light bg-dark p-1">TODO List NodeJs + Angular</div>
+<div class="modal fade" id="addNewTask" target="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Add a new task
+        </h5>
+      </div>
+      <div class="modal-body">
+        <app-task-create></app-task-create>
+      </div>
+    </div>
+  </div>
+
 </div>

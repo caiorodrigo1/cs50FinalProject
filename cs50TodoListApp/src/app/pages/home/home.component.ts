@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/user/login/login.service';
+import { TasksService } from 'src/app/user/shared/tasks.service';
 import { environment } from 'src/environments/environment';
 
 export interface Task {
+  id: string;
   isDone: boolean;
   content: string;
   author: string;
@@ -23,7 +25,8 @@ export class HomeComponent implements OnInit {
   constructor(
     public loginService: LoginService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private tasksService: TasksService
   ) {}
 
   ngOnInit(): void {
@@ -36,23 +39,26 @@ export class HomeComponent implements OnInit {
     return this.http.get<Task[]>(`${environment.baseUrlBackend}/tasks`);
   }
 
-  markAsDone(id: string) {
-    return this.http
-      .patch(`${environment.baseUrlBackend}/tasks/done/${id}, body: any`)
-      .subscribe(
-        () => {},
-        (error) => {
-          console.error('Error marking task as done', error);
-        }
-      );
-  }
-
-  editTask(task: any) {
-    // Open a dialog to edit the task
+  markAsDone(task: any) {
+    this.tasksService.markDone(task.id).subscribe(
+      (res) => {
+        location.reload();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   deleteTask(task: any) {
-    // Make an HTTP request to delete the task
+    this.tasksService.delete(task.id).subscribe(
+      (res) => {
+        this.dataSource = this.dataSource.filter((e) => e.id !== task.id);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   isLoggedIn(): boolean {
