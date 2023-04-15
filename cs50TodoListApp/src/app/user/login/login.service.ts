@@ -21,7 +21,7 @@ export class LoginService {
         map((data) => this.setTokenLocalStorage(data)),
         catchError((err) => {
           this.logout();
-          throw 'Falha ao efetuar login.';
+          throw 'Login failed.';
         })
       );
   }

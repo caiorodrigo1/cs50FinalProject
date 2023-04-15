@@ -25,6 +25,7 @@ import { LogoutComponent } from './user/logout/logout.component';
 import { AuthInterceptor } from './user/auth.interceptor';
 import { AuthGuard } from './user/auth.guard';
 import { TaskCreateComponent } from './user/task-create/task-create.component';
+import { RegisterComponent } from './user/user-create/user-create.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { TaskCreateComponent } from './user/task-create/task-create.component';
     HomeComponent,
     LogoutComponent,
     TaskCreateComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
