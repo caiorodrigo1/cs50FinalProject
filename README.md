@@ -1,6 +1,6 @@
 # CS50 TODO List
 
-#### Video Demo: <URL HERE>
+#### Video Demo: <https://www.youtube.com/watch?v=RnkNhvt9Z4M&ab_channel=ClipseHighlights>
 
 #### Description:
 
