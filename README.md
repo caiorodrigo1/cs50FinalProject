@@ -31,8 +31,8 @@ To run the API of the project, you need to follow these steps:
 
 7. Finally, run the following command to apply the database migrations:
 
-  ``$ yarn typeorm migration:run -d src/database/data-source.ts
-``
+   `$ yarn typeorm migration:run -d src/database/data-source.ts
+`
    
 8. The API should now be accessible at `http://localhost:3990`.
 
