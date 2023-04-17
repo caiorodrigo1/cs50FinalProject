@@ -33,7 +33,7 @@ To run the API of the project, you need to follow these steps:
 
    `$ yarn typeorm migration:run -d src/database/data-source.ts
 `
-   
+
 8. The API should now be accessible at `http://localhost:3990`.
 
 ## API Endpoints
@@ -47,7 +47,12 @@ This project provides the following RESTful API endpoints:
 - `DELETE /tasks/:id`: deletes a task by ID.
 - `PATCH /tasks/done/:id`: marks a task as done by ID.
 
+### Swagger
+
+Documentation available at http://localhost:3990/api-docs
+
 ## Frontend
+
 The frontend of the application is built using Angular 14, Bootstrap, and Material Angular. To run the frontend, navigate to the 'cs50TodoListApp' directory and run the following commands:
 
 `$ npm install`
