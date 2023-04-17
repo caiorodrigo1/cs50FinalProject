@@ -33,6 +33,7 @@ To run the API of the project, you need to follow these steps:
 
   ``$ yarn typeorm migration:run -d src/database/data-source.ts
 ``
+   
 8. The API should now be accessible at `http://localhost:3990`.
 
 ## API Endpoints
