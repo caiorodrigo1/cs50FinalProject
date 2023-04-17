@@ -45,7 +45,7 @@ This project provides the following RESTful API endpoints:
 - `DELETE /tasks/:id`: deletes a task by ID.
 - `PATCH /tasks/done/:id`: marks a task as done by ID.
 
-Frontend
+## Frontend
 The frontend of the application is built using Angular 14, Bootstrap, and Material Angular. To run the frontend, navigate to the 'cs50TodoListApp' directory and run the following commands:
 
 `$ npm install`
